@@ -14,5 +14,19 @@ public class ModeleGrille {
         tableau = new Case[hauteur][largeur]; // initialisation du tableau d'objet case
     }
 
+    public int getHauteur() {
+        return hauteur;
+    }
 
+    public void setHauteur(int hauteur) {
+        this.hauteur = hauteur;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(int largeur) {
+        this.largeur = largeur;
+    }
 }
