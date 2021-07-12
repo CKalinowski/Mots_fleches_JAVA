@@ -6,16 +6,16 @@ public class Main {
 
     public static void main(String[] args) {
         Grille grille = new Grille();
-        grille.creategrille();
-        grille.displaygrille();
+        grille.createGrille();
+        grille.displayGrille();
         grille.setDefinition();
-        grille.displaygrille();
+        grille.displayGrille();
         System.out.print("\n");
         grille.setDefinition();
-        grille.displaygrille();
+        grille.displayGrille();
         System.out.print("\n");
         grille.setDefinition();
-        grille.displaygrille();
+        grille.displayGrille();
         System.out.print("\n");
     }
 }
