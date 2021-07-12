@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Grille
 {
-    int height;
-    int width;
+    int hauteur;
+    int largeur;
     Case grille[][];
     Definition definitions[][];
 
@@ -15,19 +15,19 @@ public class Grille
     /**
      * Cree la grille sur n x n
      */
-    public void creategrille()
+    public void createGrille()
     {
         Scanner sc = new Scanner(System.in);
         System.out.print("Entrez le nombre de lignes dans la grille: ");
-        height = sc.nextInt();
+        hauteur = sc.nextInt();
 
         System.out.print("Entrez le nombre de colonne dans la grille: ");
-        width = sc.nextInt();
+        largeur = sc.nextInt();
 
-        grille = new Case[width][height];
+        grille = new Case[largeur][hauteur];
 
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int y = 0; y < hauteur; y++) {
+            for(int x = 0; x < largeur; x++) {
                 grille[x][y] = new Case();
                 grille[x][y].setLabel(" ");
             }
@@ -38,10 +38,10 @@ public class Grille
     /**
      * Affiche la grille
      */
-    public void displaygrille()
+    public void displayGrille()
     {
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int y = 0; y < hauteur; y++) {
+            for(int x = 0; x < largeur; x++) {
                 System.out.printf(" %s |", grille[x][y].getLabel());
             }
             System.out.print("\n");
@@ -63,21 +63,23 @@ public class Grille
 
             System.out.print("Position Y (vertical) de la definition: ");
             y = sc.nextInt() - 1;
+
+            //Position non comprise dans la grille
             if(x == grille[0].length - 1 && y == grille.length - 1) {
-                System.out.println("Choisir une autre position");
+                System.out.println("Position invalide ! Choisir une autre position");
             }
         }while(x == grille[0].length - 1 && y == grille.length - 1);
 
 
         grille[x][y].setLabel("D");
-        displaygrille();
+        displayGrille();
 
         choseDirection(x, y);
     }
 
 
     /**
-     * Choisi une direction pour la definition
+     * Permet à l'utilisateur de choisir une direction pour la definition
      * @param definitionX Integer definitionX
      * @param definitionY Integer definitionY
      */
@@ -87,28 +89,28 @@ public class Grille
         int direction;
 
         do {
-            System.out.println("Choisir la direction du mot :");
+            System.out.println("Choisissez la direction du mot :");
             System.out.println("[0] Horizontal direct");
             System.out.println("[1] Horizontal indirect");
             System.out.println("[2] Vertical direct");
             System.out.println("[3] Vertical indirect");
 
             direction = sc.nextInt();
-        }while(!countEmptyCases(direction, definitionX, definitionY));
+        }while(!countCasesVides(direction, definitionX, definitionY));
     }
 
 
     /**
-     * Compte le nombre de cases vide sur le chemin d'une definition
+     * Compte le nombre de cases vide sur le chemin choisi pour une definition
      * @param direction Integer direction
      * @param definitionX Integer definitionX
      * @param definitionY Integer definitionY
      * @return boolean result
      */
-    public boolean countEmptyCases(int direction, int definitionX, int definitionY) {
-        int i = definitionX, j = definitionY, totalEmptyCases = 0;
+    public boolean countCasesVides(int direction, int definitionX, int definitionY) {
+        int i = definitionX, j = definitionY, totalCasesVides = 0;
         boolean result = false;
-        String casesOnTheWay = "";
+        String caseCroisee = "";
 
         switch (direction) {
             case 0 -> {
@@ -119,14 +121,14 @@ public class Grille
                 }
                 while (i < grille[0].length && !grille[i][j].getLabel().equals("D")) {
                     if(grille[i][j].getLabel().equals(" ")) {
-                        casesOnTheWay = casesOnTheWay + ".";
+                        caseCroisee = caseCroisee + ".";
                     } else {
-                        casesOnTheWay = casesOnTheWay + grille[i][j].getLabel();
+                        caseCroisee = caseCroisee + grille[i][j].getLabel();
                     }
-                    totalEmptyCases++;
+                    totalCasesVides++;
                     i++;
                 }
-                System.out.println("En horizontal direct il y a " + totalEmptyCases + "\n");
+                System.out.println("En horizontal direct il y a " + totalCasesVides + "\n");
                 result = true;
             }
             case 1 -> {
@@ -137,14 +139,14 @@ public class Grille
                 }
                 while (i < grille[0].length && !grille[i][j].getLabel().equals("D")) {
                     if(grille[i][j].getLabel().equals(" ")) {
-                        casesOnTheWay = casesOnTheWay + ".";
+                        caseCroisee = caseCroisee + ".";
                     } else {
-                        casesOnTheWay = casesOnTheWay + grille[i][j].getLabel();
+                        caseCroisee = caseCroisee + grille[i][j].getLabel();
                     }
-                    totalEmptyCases++;
+                    totalCasesVides++;
                     i++;
                 }
-                System.out.println("En horizontal indirect il y a " + totalEmptyCases + "\n");
+                System.out.println("En horizontal indirect il y a " + totalCasesVides + "\n");
                 result = true;
             }
             case 2 -> {
@@ -155,14 +157,14 @@ public class Grille
                 }
                 while (j < grille.length && !grille[i][j].getLabel().equals("D")) {
                     if(grille[i][j].getLabel().equals(" ")) {
-                        casesOnTheWay = casesOnTheWay + ".";
+                        caseCroisee = caseCroisee + ".";
                     } else {
-                        casesOnTheWay = casesOnTheWay + grille[i][j].getLabel();
+                        caseCroisee = caseCroisee + grille[i][j].getLabel();
                     }
-                    totalEmptyCases++;
+                    totalCasesVides++;
                     j++;
                 }
-                System.out.println("En vertical direct il y a " + totalEmptyCases + "\n");
+                System.out.println("En vertical direct il y a " + totalCasesVides + "\n");
                 result = true;
             }
             case 3 -> {
@@ -173,21 +175,21 @@ public class Grille
                 }
                 while (j < grille.length && !grille[i][j].getLabel().equals("D")) {
                     if(grille[i][j].getLabel().equals(" ")) {
-                        casesOnTheWay = casesOnTheWay + ".";
+                        caseCroisee = caseCroisee + ".";
                     } else {
-                        casesOnTheWay = casesOnTheWay + grille[i][j].getLabel();
+                        caseCroisee = caseCroisee + grille[i][j].getLabel();
                     }
-                    totalEmptyCases++;
+                    totalCasesVides++;
                     j++;
                 }
-                System.out.println("En vertical indirect il y a " + totalEmptyCases + "\n");
+                System.out.println("En vertical indirect il y a " + totalCasesVides + "\n");
                 result = true;
             }
             default -> result = false;
         }
 
-        System.out.println(casesOnTheWay);
-        addWord(direction, definitionX, definitionY, totalEmptyCases, casesOnTheWay);
+        System.out.println(caseCroisee);
+        addWord(direction, definitionX, definitionY, totalCasesVides, caseCroisee);
         return result;
     }
 
@@ -198,36 +200,36 @@ public class Grille
      * @param positionX Integer positionX
      * @param positionY Integer positionY
      * @param nbEmptyCases Integer nbEmptyCases
-     * @param casesOnTheWay String casesOnTheWay
+     * @param caseCroisee String caseCroisee
      */
-    public void addWord(int direction, int positionX, int positionY, int nbEmptyCases, String casesOnTheWay) {
+    public void addWord(int direction, int positionX, int positionY, int nbEmptyCases, String caseCroisee) {
         File dictionnaire = new File();
-        String word = dictionnaire.getRandomWordWithLetter(casesOnTheWay, nbEmptyCases);
+        String word = dictionnaire.getRandomWordWithLetter(caseCroisee, nbEmptyCases);
 
         switch (direction) {
             case 0 -> {
-                positionX++;
+                positionX++ ;
                 for (int i = 0; i < word.length(); i++) {
                     grille[positionX][positionY].setLabel(Character.toString(word.charAt(i)));
                     positionX++;
                 }
             }
             case 1 -> {
-                positionY++;
+                positionY++ ;
                 for (int i = 0; i < word.length(); i++) {
                     grille[positionX][positionY].setLabel(Character.toString(word.charAt(i)));
                     positionX++;
                 }
             }
             case 2 -> {
-                positionY++;
+                positionY++ ;
                 for (int i = 0; i < word.length(); i++) {
                     grille[positionX][positionY].setLabel(Character.toString(word.charAt(i)));
                     positionY++;
                 }
             }
             case 3 -> {
-                positionX++;
+                positionX++ ;
                 for (int i = 0; i < word.length(); i++) {
                     grille[positionX][positionY].setLabel(Character.toString(word.charAt(i)));
                     positionY++;
