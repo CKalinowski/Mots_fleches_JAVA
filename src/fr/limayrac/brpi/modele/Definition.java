@@ -1,28 +1,53 @@
 package fr.limayrac.brpi.modele;
 
-public class Definition {
+public class Definition extends Case
+{
+    String label;
+    int x;
+    int y;
+    int direction;
 
-    private String contenu;
-    private String direction;
+    public Definition() {}
 
-    public Definition(String contenu, String direction) {
-        this.contenu = contenu;
-        this.direction = direction;
+    @Override
+    public String getLabel()
+    {
+        return label;
     }
 
-    public String getContenu() {
-        return contenu;
+    @Override
+    public void setLabel(String label)
+    {
+        this.label = label;
     }
 
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
+    public int getX()
+    {
+        return x;
     }
 
-    public String getDirection() {
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+    public int getY()
+    {
+        return y;
+    }
+
+    public void setY(int y)
+    {
+        this.y = y;
+    }
+
+    public int getDirection()
+    {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(int direction)
+    {
         this.direction = direction;
     }
 }
