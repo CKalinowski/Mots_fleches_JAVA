@@ -1,12 +1,10 @@
 package fr.limayrac.brpi;
-import modele.Grille;
-import util.File;
+import fr.limayrac.brpi.modele.Grille;
+import fr.limayrac.brpi.util.File;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-    }
-
         Grille grille = new Grille();
         grille.creategrille();
         grille.displaygrille();
@@ -19,4 +17,5 @@ public class Main {
         grille.setDefinition();
         grille.displaygrille();
         System.out.print("\n");
+    }
 }

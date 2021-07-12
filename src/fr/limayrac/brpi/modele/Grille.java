@@ -1,8 +1,8 @@
 package fr.limayrac.brpi.modele;
 
 import fr.limayrac.brpi.util.File;
-
 import java.util.Scanner;
+
 
 public class Grille
 {
@@ -18,10 +18,10 @@ public class Grille
     public void creategrille()
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Saisir le nombre de lignes dans la matrice: ");
+        System.out.print("Entrez le nombre de lignes dans la grille: ");
         height = sc.nextInt();
 
-        System.out.print("Saisir le nombre de colonne dans la matrice: ");
+        System.out.print("Entrez le nombre de colonne dans la grille: ");
         width = sc.nextInt();
 
         grille = new Case[width][height];
@@ -58,10 +58,10 @@ public class Grille
         int x, y;
 
         do {
-            System.out.print("Position x de la definition: ");
+            System.out.print("Position X (horizontal) de la definition : ");
             x = sc.nextInt() - 1;
 
-            System.out.print("Position Y de la definition: ");
+            System.out.print("Position Y (vertical) de la definition: ");
             y = sc.nextInt() - 1;
             if(x == grille[0].length - 1 && y == grille.length - 1) {
                 System.out.println("Choisir une autre position");
@@ -87,7 +87,7 @@ public class Grille
         int direction;
 
         do {
-            System.out.println("Dans quel direction voulez-vous placer un mot :");
+            System.out.println("Choisir la direction du mot :");
             System.out.println("[0] Horizontal direct");
             System.out.println("[1] Horizontal indirect");
             System.out.println("[2] Vertical direct");
@@ -114,7 +114,7 @@ public class Grille
             case 0 -> {
                 i++;
                 if (i == grille[0].length || grille[i][j].getLabel().equals("D")) {
-                    System.out.println("Il n'y a pas de cases libre en horizontal directe");
+                    System.out.println("Il n'y a pas de cases libre en horizontal direct");
                     break;
                 }
                 while (i < grille[0].length && !grille[i][j].getLabel().equals("D")) {
@@ -126,13 +126,13 @@ public class Grille
                     totalEmptyCases++;
                     i++;
                 }
-                System.out.println("En horizontal directe il y a " + totalEmptyCases + "\n");
+                System.out.println("En horizontal direct il y a " + totalEmptyCases + "\n");
                 result = true;
             }
             case 1 -> {
                 j++;
                 if (j == grille.length || grille[i][j].getLabel().equals("D")) {
-                    System.out.println("Il n'y a pas de cases libre en horizontal indirecte");
+                    System.out.println("Il n'y a pas de cases libre en horizontal indirect");
                     break;
                 }
                 while (i < grille[0].length && !grille[i][j].getLabel().equals("D")) {
@@ -144,13 +144,13 @@ public class Grille
                     totalEmptyCases++;
                     i++;
                 }
-                System.out.println("En horizontal indirecte il y a " + totalEmptyCases + "\n");
+                System.out.println("En horizontal indirect il y a " + totalEmptyCases + "\n");
                 result = true;
             }
             case 2 -> {
                 j++;
                 if (j == grille.length || grille[i][j].getLabel().equals("D")) {
-                    System.out.println("Il n'y a pas de cases libre en vertical directe");
+                    System.out.println("Il n'y a pas de cases libre en vertical direct");
                     break;
                 }
                 while (j < grille.length && !grille[i][j].getLabel().equals("D")) {
@@ -162,13 +162,13 @@ public class Grille
                     totalEmptyCases++;
                     j++;
                 }
-                System.out.println("En vertical directe il y a " + totalEmptyCases + "\n");
+                System.out.println("En vertical direct il y a " + totalEmptyCases + "\n");
                 result = true;
             }
             case 3 -> {
                 i++;
                 if (i == grille[0].length || grille[i][j].getLabel().equals("D")) {
-                    System.out.println("Il n'y a pas de cases libre en vertical indirecte");
+                    System.out.println("Il n'y a pas de cases libre en vertical indirect");
                     break;
                 }
                 while (j < grille.length && !grille[i][j].getLabel().equals("D")) {
@@ -180,7 +180,7 @@ public class Grille
                     totalEmptyCases++;
                     j++;
                 }
-                System.out.println("En vertical indirecte il y a " + totalEmptyCases + "\n");
+                System.out.println("En vertical indirect il y a " + totalEmptyCases + "\n");
                 result = true;
             }
             default -> result = false;
@@ -201,8 +201,8 @@ public class Grille
      * @param casesOnTheWay String casesOnTheWay
      */
     public void addWord(int direction, int positionX, int positionY, int nbEmptyCases, String casesOnTheWay) {
-        File dico = new File();
-        String word = dico.getRandomWordWithLetter(casesOnTheWay, nbEmptyCases);
+        File dictionnaire = new File();
+        String word = dictionnaire.getRandomWordWithLetter(casesOnTheWay, nbEmptyCases);
 
         switch (direction) {
             case 0 -> {
