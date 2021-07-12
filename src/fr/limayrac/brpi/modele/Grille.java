@@ -13,7 +13,7 @@ public class Grille
 
 
     /**
-     * Cree la grille sur n x n
+     * Cree la grille n x n
      */
     public void createGrille()
     {
@@ -36,7 +36,7 @@ public class Grille
 
 
     /**
-     * Affiche la grille
+     * fonction qui affiche la grille
      */
     public void displayGrille()
     {
@@ -50,7 +50,7 @@ public class Grille
 
 
     /**
-     * Place une definition
+     * Place une definition dans la grille
      */
     public void setDefinition()
     {
