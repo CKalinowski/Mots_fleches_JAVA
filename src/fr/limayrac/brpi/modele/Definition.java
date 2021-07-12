@@ -1,5 +1,6 @@
 package fr.limayrac.brpi.modele;
 
+//Déclaration de la classe
 public class Definition extends Case
 {
     String label;
@@ -9,6 +10,7 @@ public class Definition extends Case
 
     public Definition() {}
 
+    //Récupération du Getter et Setter de la classe parente Case
     @Override
     public String getLabel()
     {
@@ -21,6 +23,7 @@ public class Definition extends Case
         this.label = label;
     }
 
+    //Getter et Setter des variables de positions et de direction
     public int getX()
     {
         return x;
